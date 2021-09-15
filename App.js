@@ -7,7 +7,9 @@ import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import UserListingScreen from './screens/UserListingScreen';
+
 import FormikDemoScreen from './screens/FormikDemoScreen';
+import NewUserDemoScreen from './screens/NewUserDemoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,14 +18,14 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen
-          name="SignInScreen"
-          component={SignInScreen}
-          options={{title: 'Sign in'}}
-        />
-        <Stack.Screen
           name="SignUpScreen"
           component={SignUpScreen}
           options={{title: 'Sign Up'}}
+        />
+        <Stack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{title: 'Sign in'}}
         />
         <Stack.Screen
           name="UserProfileScreen"
@@ -39,6 +41,11 @@ const App = () => {
           name="FormikDemoScreen"
           component={FormikDemoScreen}
           options={{title: 'Formik Demo Screen'}}
+        />
+        <Stack.Screen
+          name="NewUserDemoScreen"
+          component={NewUserDemoScreen}
+          options={{title: 'New User Demo Screen'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

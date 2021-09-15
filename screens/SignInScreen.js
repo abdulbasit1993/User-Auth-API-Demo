@@ -15,7 +15,6 @@ import * as yup from 'yup';
 
 import COLORS from '../consts/color';
 import STYLES from '../styles';
-import SignUpScreen from './SignUpScreen';
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -36,23 +35,16 @@ function SignInScreen({navigation}) {
   const [useremail, setUseremail] = useState('');
   const [userpass, setUserpass] = useState('');
 
-  const signInHandler = () => {
-    if (!useremail.trim()) {
-      alert('Please enter your email');
-      return;
-    }
-    if (!userpass.trim()) {
-      alert('Please enter your password');
-      return;
-    }
-    navigation.navigate('UserProfileScreen', {key: useremail});
+  const signInHandler = values => {
+    // alert(JSON.stringify(values));
+    navigation.navigate('UserProfileScreen', {key: values.email});
   };
 
   return (
     <Formik
       initialValues={{email: '', password: ''}}
       validateOnMount={true}
-      onSubmit={values => alert(JSON.stringify(values))}
+      onSubmit={signInHandler}
       validationSchema={loginValidationSchema}>
       {({
         handleChange,
@@ -194,6 +186,7 @@ const styles = StyleSheet.create({
   signuptext: {
     color: COLORS.pink,
     fontWeight: 'bold',
+    marginLeft: 5,
   },
   errors: {
     fontSize: 14,
