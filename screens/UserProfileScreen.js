@@ -3,7 +3,8 @@ import axios from 'axios';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
-const UserProfileScreen = ({navigation}) => {
+const UserProfileScreen = ({navigation, route: {params}}) => {
+  console.log(params);
   const [data, setData] = useState([]);
 
   const getUserData = () => {
@@ -24,6 +25,7 @@ const UserProfileScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={{fontSize: 18}}>Welcome {params.key} !</Text>
       <Button onPress={getUserData} title="GET USER DATA" />
       <Image source={{uri: data.avatar}} style={styles.imageStyle} />
       <Text style={styles.textStyle}>
