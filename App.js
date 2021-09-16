@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -11,21 +11,27 @@ import UserListingScreen from './screens/UserListingScreen';
 import FormikDemoScreen from './screens/FormikDemoScreen';
 import NewUserDemoScreen from './screens/NewUserDemoScreen';
 
+import SplashScreen from 'react-native-splash-screen';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen
-          name="SignUpScreen"
-          component={SignUpScreen}
-          options={{title: 'Sign Up'}}
-        />
-        <Stack.Screen
           name="SignInScreen"
           component={SignInScreen}
           options={{title: 'Sign in'}}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{title: 'Sign Up'}}
         />
         <Stack.Screen
           name="UserProfileScreen"

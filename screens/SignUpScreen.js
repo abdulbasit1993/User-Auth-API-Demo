@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -35,6 +35,7 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 function SignUpScreen({navigation, route: {params}}) {
+  const [token, setToken] = useState('');
   console.log('params -- > ', params);
 
   const signUpHandler = values => {
@@ -51,8 +52,10 @@ function SignUpScreen({navigation, route: {params}}) {
       .post('https://reqres.in/api/register', values)
       .then(function (response) {
         // handle success
-        console.log(response.data);
-        alert(JSON.stringify(response.data));
+        // console.log(response.data);
+        alert('Your Login Token is: ' + response.data.token);
+        setToken(response.data.token);
+        console.log('Token: ', token);
       })
       .catch(function (error) {
         // handle error
