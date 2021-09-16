@@ -10,11 +10,15 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import axios from 'axios';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
 import COLORS from '../consts/color';
 import STYLES from '../styles';
+
+import {AuthContext} from '../context';
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -32,12 +36,22 @@ const loginValidationSchema = yup.object().shape({
 });
 
 function SignInScreen({navigation}) {
+  const {signIn} = React.useContext(AuthContext);
   const [useremail, setUseremail] = useState('');
   const [userpass, setUserpass] = useState('');
 
   const signInHandler = values => {
-    // alert(JSON.stringify(values));
-    navigation.navigate('UserProfileScreen', {key: values.email});
+    axios
+      .post('https://reqres.in/api/login', values)
+      .then(function (response) {
+        // handle success
+        console.log('Your Login Token is: ', response.data.token);
+        signIn(response.data.token);
+      })
+      .catch(function (error) {
+        // handle error
+        alert(error.message);
+      });
   };
 
   return (

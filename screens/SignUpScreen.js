@@ -19,6 +19,8 @@ import * as yup from 'yup';
 import COLORS from '../consts/color';
 import STYLES from '../styles';
 
+import {AuthContext} from '../context';
+
 const signUpValidationSchema = yup.object().shape({
   email: yup
     .string()
@@ -34,28 +36,18 @@ const signUpValidationSchema = yup.object().shape({
     ),
 });
 
-function SignUpScreen({navigation, route: {params}}) {
+function SignUpScreen({navigation}) {
+  const {signUp} = React.useContext(AuthContext);
+
   const [token, setToken] = useState('');
-  console.log('params -- > ', params);
 
   const signUpHandler = values => {
-    // alert(
-    //   'Entered email: ' +
-    //     values.email +
-    //     ' and ' +
-    //     'Entered password: ' +
-    //     values.password,
-    // );
-    // navigation.navigate('NewUserDemoScreen');
-
     axios
       .post('https://reqres.in/api/register', values)
       .then(function (response) {
         // handle success
-        // console.log(response.data);
-        alert('Your Login Token is: ' + response.data.token);
-        setToken(response.data.token);
-        console.log('Token: ', token);
+        console.log('Your Login Token is: ', response.data.token);
+        signUp(response.data.token);
       })
       .catch(function (error) {
         // handle error
@@ -89,15 +81,15 @@ function SignUpScreen({navigation, route: {params}}) {
               <Text style={styles.secondheadingText}>Sign up to continue</Text>
             </View>
             <View style={styles.inputsView}>
-              {/* <View style={STYLES.inputContainer}>
-            <Icon
-              name="person-outline"
-              size={20}
-              color={COLORS.light}
-              style={STYLES.inputIcon}
-            />
-            <TextInput placeholder="Name" style={STYLES.input} />
-          </View> */}
+              <View style={STYLES.inputContainer}>
+                <Icon
+                  name="person-outline"
+                  size={20}
+                  color={COLORS.light}
+                  style={STYLES.inputIcon}
+                />
+                <TextInput placeholder="Name" style={STYLES.input} />
+              </View>
 
               <View style={STYLES.inputContainer}>
                 <Icon

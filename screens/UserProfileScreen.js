@@ -2,9 +2,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
-const UserProfileScreen = ({navigation, route: {params}}) => {
-  console.log(params);
+import UserListingScreen from './UserListingScreen';
+
+import {AuthContext} from '../context';
+
+const UserProfileScreen = ({navigation}) => {
+  const {signOut} = React.useContext(AuthContext);
+
   const [data, setData] = useState([]);
 
   const getUserData = () => {
@@ -25,7 +31,7 @@ const UserProfileScreen = ({navigation, route: {params}}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 18}}>Welcome {params.key} !</Text>
+      <Text style={{fontSize: 18}}>Welcome User !</Text>
       <Button onPress={getUserData} title="GET USER DATA" />
       <Image source={{uri: data.avatar}} style={styles.imageStyle} />
       <Text style={styles.textStyle}>
@@ -34,11 +40,15 @@ const UserProfileScreen = ({navigation, route: {params}}) => {
       <Text style={styles.textStyle}>Email: {data.email}</Text>
       <Text style={styles.textStyle}>User ID: {data.id}</Text>
 
-      <View style={{position: 'absolute', bottom: 80}}>
+      <View style={{position: 'absolute', bottom: 90}}>
         <Button
+          style={{marginBottom: 30}}
           title="Go to User Listings"
           onPress={() => navigation.navigate('UserListingScreen')}
         />
+        <View style={{marginTop: 20}}>
+          <Button title="Sign Out" onPress={() => signOut()} />
+        </View>
       </View>
     </View>
   );
