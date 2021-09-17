@@ -47,6 +47,7 @@ function SignUpScreen({navigation}) {
       .then(function (response) {
         // handle success
         console.log('Your Sign Up Token is: ', response.data.token);
+        console.log('Your sign up ID is: ', response.data.id);
         signUp(response.data.token);
       })
       .catch(function (error) {
@@ -88,12 +89,7 @@ function SignUpScreen({navigation}) {
                   color={COLORS.light}
                   style={STYLES.inputIcon}
                 />
-                <TextInput
-                  placeholder="Name"
-                  style={STYLES.input}
-                  onChangeText={value => setName(value)}
-                  value={values.name}
-                />
+                <TextInput placeholder="Name" style={STYLES.input} />
               </View>
 
               <View style={STYLES.inputContainer}>
