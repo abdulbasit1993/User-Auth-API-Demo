@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-
-import UserListingScreen from './UserListingScreen';
 
 import {AuthContext} from '../context';
 

@@ -46,7 +46,7 @@ function SignUpScreen({navigation}) {
       .post('https://reqres.in/api/register', values)
       .then(function (response) {
         // handle success
-        console.log('Your Login Token is: ', response.data.token);
+        console.log('Your Sign Up Token is: ', response.data.token);
         signUp(response.data.token);
       })
       .catch(function (error) {
@@ -88,7 +88,12 @@ function SignUpScreen({navigation}) {
                   color={COLORS.light}
                   style={STYLES.inputIcon}
                 />
-                <TextInput placeholder="Name" style={STYLES.input} />
+                <TextInput
+                  placeholder="Name"
+                  style={STYLES.input}
+                  onChangeText={value => setName(value)}
+                  value={values.name}
+                />
               </View>
 
               <View style={STYLES.inputContainer}>
